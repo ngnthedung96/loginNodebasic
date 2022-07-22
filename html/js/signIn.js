@@ -1,19 +1,26 @@
 $(document).ready(function () {
     $('.form-submit').click(function (e) {
-        e.preventDefault();
+        e.preventDefault()
         const userName = document.querySelector("#fullname")
         const password = document.querySelector("#password")
         if (userName.value && password.value) {
             $.ajax({
                 url: 'http://localhost:3000/message',
                 dataType: 'json',
-                type: "GET"
+                type: "POST",
+                data: {
+                    "username": `${userName.value}`,
+                    "password": `${password.value}`,
+                    "check": true,
+                }
+
             })
                 .done(function (data, textStatus, jqXHR) {
-                    successFunction(data)
+                    window.addEventListener("beforeunload", successFunction(data), { capture: true })
                 })
                 .fail(function (jqXHR, textStatus, errorThrown) {
                     errorFunction(jqXHR, textStatus, errorThrown)
+
                 })
         }
     });
@@ -46,4 +53,7 @@ function errorFunction(jqXHR, textStatus, errorThrown) {
         type: 'error'
     })
 }
+
+
+
 

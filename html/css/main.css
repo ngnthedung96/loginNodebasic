@@ -92,7 +92,6 @@ html {
 .form-submit {
     outline: none;
     background-color: #cbe045;
-    margin-top: 12px;
     padding: 12px 16px;
     font-weight: 600;
     color: #fff;
@@ -121,6 +120,10 @@ input[type=radio]+span {
     font-size: 120%;
     padding-top: 4px;
     padding-left: 10px;
+}
+
+.question {
+    margin-bottom: 10px;
 }
 
 /* --------------------------------toast------------------------------ */

@@ -47,3 +47,5 @@ function errorFunction(jqXHR, textStatus, errorThrown) {
         type: 'error'
     })
 }
+
+
