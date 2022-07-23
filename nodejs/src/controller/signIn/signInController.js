@@ -9,6 +9,7 @@ class signInController {
                 })
                 if (check) {
                     req.session.userLogin = check
+                    console.log("signin", req.session.userLogin)
                     res.json({
                         "check": true,
                         "dataUser": check

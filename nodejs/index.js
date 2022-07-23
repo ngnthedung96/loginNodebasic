@@ -1,8 +1,11 @@
 const express = require('express')
 const app = express()
 const session = require('express-session')
-//connect db
-const connection = require('./src/config/connectDb')
+
+
+
+
+
 
 //middleware
 app.use(
@@ -11,16 +14,23 @@ app.use(
     }),
 );
 app.use(express.json());
+
+
+
 app.use(session({
     resave: true,
     saveUninitialized: true,
     secret: 'somesecret',
     cookie: { maxAge: 60000 }
 }));
+//connect db
+const connection = require('./src/config/connectDb')
+
 
 //truyền app vào route
 const route = require('./src/route/index')
 route(app)
+
 
 
 

@@ -1,6 +1,7 @@
 const connection = require('../../config/connectDb')
 class homeController {
     show(req, res, next) {
+        console.log("home", req.session.userLogin)
         if (req.session.userLogin) {
             res.json({
                 "check": false,
