@@ -6,13 +6,14 @@
         integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
         crossorigin="anonymous" />
     <link rel="stylesheet" href="../css/main.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/025c1ecb3f.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="main">
-        <form class="form" method="POST" action="" id="form-1">
+        <form class="form" id="form-1">
             <h3 class="heading">Đăng Nhập</h3>
             <p class="desc">❤️</p>
 
@@ -36,27 +37,60 @@
             <div class="div1">
 
             </div>
-            <button class="form-submit">Đăng nhập</button>
+            <button type="button" id="btn-pu">Đăng nhập</button>
         </form>
         <div id="toast">
 
         </div>
     </div>
 </body>
-<script type="module" src="../js/signIn.js"></script>
-<script src="../js/validate.js"></script>
-<script type="module" src="../js/toast.js"></script>
+<!-- <script type="module" src="../js/signIn.js"></script> -->
+<!-- <script src="../js/validate.js"></script>
+<script type="module" src="../js/toast.js"></script> -->
 <script>
-    Validator({
-        form: '#form-1',
-        errorSelector: '.form-message',
-        formSubmit: '.form-submit',
-        formGroup: '.form-group',
-        rules: [
-            Validator.isRequired('#fullname',),
-            Validator.isRequired('#password'),
-        ]
-    })
+    // Validator({
+    //     form: '#form-1',
+    //     errorSelector: '.form-message',
+    //     formSubmit: '.form-submit',
+    //     formGroup: '.form-group',
+    //     rules: [
+    //         Validator.isRequired('#fullname',),
+    //         Validator.isRequired('#password'),
+    //     ]
+    // })
+    $(document).ready(function () {
+        $('#btn-pu').on('click', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'http://localhost:3000/message',
+                dataType: 'json',
+                type: "POST",
+                data: {
+                    "username": $('#fullname').val(),
+                    "password": $('#password').val(),
+                },
+                success: function (data) {
+                    console.log(data);
+                    return;
+                    // e.preventDefault();
+                    // if (data.check == true) {
+                    //     toast({
+                    //         title: 'Success',
+                    //         message: 'Đăng nhập tài khoản thành công',
+                    //         type: 'success'
+                    //     })
+                    // } else {
+                    //     toast({
+                    //         title: 'Error',
+                    //         message: 'Sai tên tài khoản hoặc mật khẩu',
+                    //         type: 'error'
+                    //     })
+                    // }
+                }
+
+            })
+        });
+    });
 </script>
 
 </html>

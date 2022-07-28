@@ -1,12 +1,20 @@
-// get the client
-const mysql = require('mysql2');
+const { Sequelize } = require('sequelize');
 
-// create the connection to database
-const connection = mysql.createConnection({
+
+// Option 3: Passing parameters separately (other dialects)
+const sequelize = new Sequelize('nodelogin', 'root', null, {
     host: 'localhost',
-    user: 'root',
-    database: 'nodelogin'
+    dialect: 'mysql'
 });
 
 
-module.exports = connection
+let connection = async () => {
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
+}
+
+module.exports = { sequelize, connection }

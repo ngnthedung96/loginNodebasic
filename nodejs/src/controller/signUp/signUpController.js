@@ -1,27 +1,24 @@
 const connection = require('../../config/connectDb')
+const { users } = require("../../model/users")
 class signUpController {
-    send(req, res, next) {
-        const dataUser = req.body
-        connection.query("SELECT * FROM accounts", function (err, result, fields) {
-            const check = result.find(function (account) {
-                return account.username === dataUser.username
+    async send(req, res, next) {
+        const { username, password } = req.body;
+        const check = await users.findOne({ where: { username: username } });
+        if (check === null) {
+            // Create a new user
+            const newUser = await users.create({ username: username, password: password });
+            res.json({
+                msg: "đăng ký thành công",
+                id: newUser.id,
+                email: newUser.username
             })
-            if (check) {
-                res.json({
-                    "check": false
-                })
-            }
-            else {
-                connection.connect(function () {
-                    connection.query("INSERT INTO accounts (username,password) VALUES (?,?)", [dataUser.username, dataUser.password], function (error, result) {
-                        res.json({
-                            "check": true
-                        });
-                    })
-                })
-            }
-        })
+        } else {
+            res.json('email da ton tai')
+        }
+
+
     }
 }
+
 
 module.exports = new signUpController

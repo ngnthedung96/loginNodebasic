@@ -1,17 +1,12 @@
-const connection = require('../../config/connectDb')
+const { users } = require("../../model/users")
 class homeController {
-    show(req, res, next) {
-        console.log("home", req.session.userLogin)
-        if (req.session.userLogin) {
-            res.json({
-                "check": false,
-                "dataUser": require.session.userLogin
-            })
+    async show(req, res, next) {
+        try {
+            let data = await users.findAll()
+            res.json(data)
         }
-        else {
-            res.json({
-                'check': false
-            })
+        catch (err) {
+            console.log(err)
         }
     }
 }

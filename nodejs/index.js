@@ -24,8 +24,8 @@ app.use(session({
     cookie: { maxAge: 60000 }
 }));
 //connect db
-const connection = require('./src/config/connectDb')
-
+const { connection } = require('./src/config/connectDb')
+connection()
 
 //truyền app vào route
 const route = require('./src/route/index')
